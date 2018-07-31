@@ -18,7 +18,7 @@ public class QueueTest {
 
     @Test
     public void testPollElementFromEmptyQueue() {
-        assertNull(integerQueue.poll());
+        assertNull(integerQueue.pull());
     }
 
     @Test
@@ -33,12 +33,12 @@ public class QueueTest {
 
     @Test
     public void testAddElement() {
-        integerQueue.add(324);
-        integerQueue.add(23);
-
+        //fixed
         integerQueue.add(5);
+        integerQueue.add(23);
+        integerQueue.add(324);
 
-        assertEquals(5, integerQueue.poll().intValue());
+        assertEquals(5, integerQueue.pull().intValue());
     }
 
     @Test
@@ -47,9 +47,9 @@ public class QueueTest {
         integerQueue.add(123);
         integerQueue.add(222);
 
-        integerQueue.poll();
+        integerQueue.pull();
 
-        assertEquals(123, integerQueue.poll().intValue());
+        assertEquals(123, integerQueue.pull().intValue());
     }
 
     @Test

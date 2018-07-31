@@ -16,7 +16,7 @@ public interface Queue<T> {
      *
      * @return an element that was retrieved from the head or null if queue is empty
      */
-    T poll();
+    T pull();
 
     /**
      * Returns a size of the queue.

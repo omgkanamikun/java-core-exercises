@@ -6,23 +6,65 @@ package com.bobocode;
  * @param <T> a generic parameter
  */
 public class LinkedQueue<T> implements Queue<T> {
-    @Override
-    public void add(T element) {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+
+    private QueueNode<T> start;
+    private QueueNode<T> end;
+    private int count;
+
+    public LinkedQueue() {
+        this.start = null;
+        this.end = null;
+        count = 0;
     }
 
     @Override
-    public T poll() {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+    public void add(T element) {
+        QueueNode<T> node = new QueueNode<>(element);
+        if (isEmpty()) {
+            start = node;
+            end = start;
+            count++;
+        } else {
+            QueueNode<T> current = start;
+            while (current.nexNode != null) {
+                current = current.nexNode;
+            }
+            current.nexNode = node;
+            current = current.nexNode;
+            end = current;
+            count++;
+        }
+    }
+
+    @Override
+    public T pull() {
+        if (isEmpty()) {
+            return null;
+        } else {
+            QueueNode<T> tempFirst;
+            tempFirst = start;
+            if (start.nexNode == null) {
+                start = null;
+                count--;
+                return tempFirst.data;
+            } else {
+                QueueNode<T> tempThird;
+                tempThird = start.nexNode.nexNode;
+                start = start.nexNode;
+                start.nexNode = tempThird;
+                count--;
+                return tempFirst.data;
+            }
+        }
     }
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        return count;
     }
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        return start == null;
     }
 }
