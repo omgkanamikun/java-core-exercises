@@ -48,10 +48,10 @@ public class LinkedQueue<T> implements Queue<T> {
                 count--;
                 return tempFirst.data;
             } else {
-                QueueNode<T> tempThird;
-                tempThird = start.nexNode.nexNode;
+                QueueNode<T> tempNext;
+                tempNext = start.nexNode.nexNode;
                 start = start.nexNode;
-                start.nexNode = tempThird;
+                start.nexNode = tempNext;
                 count--;
                 return tempFirst.data;
             }

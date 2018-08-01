@@ -42,14 +42,17 @@ public class QueueTest {
     }
 
     @Test
-    public void testPollElement() {
+    public void testPullElement() {
         integerQueue.add(33);
         integerQueue.add(123);
         integerQueue.add(222);
+        integerQueue.add(345);
 
         integerQueue.pull();
 
         assertEquals(123, integerQueue.pull().intValue());
+        assertEquals(222, integerQueue.pull().intValue());
+        assertEquals(345, integerQueue.pull().intValue());
     }
 
     @Test
@@ -58,8 +61,9 @@ public class QueueTest {
         integerQueue.add(9);
         integerQueue.add(5);
         integerQueue.add(6);
+        integerQueue.add(99);
 
-        assertEquals(4, integerQueue.size());
+        assertEquals(5, integerQueue.size());
     }
 
     @Test
@@ -69,6 +73,10 @@ public class QueueTest {
 
         assertFalse(integerQueue.isEmpty());
 
+        integerQueue.pull();
+        integerQueue.pull();
+
+        assertTrue(integerQueue.isEmpty());
     }
 
 }
