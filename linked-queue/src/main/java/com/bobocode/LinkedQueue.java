@@ -8,12 +8,10 @@ package com.bobocode;
 public class LinkedQueue<T> implements Queue<T> {
 
     private QueueNode<T> start;
-    private QueueNode<T> end;
     private int count;
 
     public LinkedQueue() {
         this.start = null;
-        this.end = null;
         count = 0;
     }
 
@@ -22,16 +20,13 @@ public class LinkedQueue<T> implements Queue<T> {
         QueueNode<T> node = new QueueNode<>(element);
         if (isEmpty()) {
             start = node;
-            end = start;
             count++;
         } else {
             QueueNode<T> current = start;
-            while (current.nexNode != null) {
-                current = current.nexNode;
+            while (current.nextNode != null) {
+                current = current.nextNode;
             }
-            current.nexNode = node;
-            current = current.nexNode;
-            end = current;
+            current.nextNode = node;
             count++;
         }
     }
@@ -43,15 +38,15 @@ public class LinkedQueue<T> implements Queue<T> {
         } else {
             QueueNode<T> tempFirst;
             tempFirst = start;
-            if (start.nexNode == null) {
+            if (start.nextNode == null) {
                 start = null;
                 count--;
                 return tempFirst.data;
             } else {
                 QueueNode<T> tempNext;
-                tempNext = start.nexNode.nexNode;
-                start = start.nexNode;
-                start.nexNode = tempNext;
+                tempNext = start.nextNode.nextNode;
+                start = start.nextNode;
+                start.nextNode = tempNext;
                 count--;
                 return tempFirst.data;
             }
