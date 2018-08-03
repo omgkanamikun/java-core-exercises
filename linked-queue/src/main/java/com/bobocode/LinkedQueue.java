@@ -7,59 +7,59 @@ package com.bobocode;
  */
 public class LinkedQueue<T> implements Queue<T> {
 
-    private QueueNode<T> start;
-    private int count;
+    private class Node<T> {
+        T data;
+        Node next;
 
-    public LinkedQueue() {
-        this.start = null;
-        count = 0;
+        public Node(T element) {
+            this.data = element;
+            next = null;
+        }
+    }
+
+    private int size;
+    private Node<T> first;
+
+    LinkedQueue() {
+        first = null;
+        size = 0;
     }
 
     @Override
     public void add(T element) {
-        QueueNode<T> node = new QueueNode<>(element);
+        Node<T> node = new Node<>(element);
         if (isEmpty()) {
-            start = node;
-            count++;
+            first = node;
+            size++;
         } else {
-            QueueNode<T> current = start;
-            while (current.nextNode != null) {
-                current = current.nextNode;
+            Node<T> temp = first;
+            while (temp.next != null) {
+                temp = temp.next;
             }
-            current.nextNode = node;
-            count++;
+            temp.next = node;
+            size++;
         }
     }
 
     @Override
     public T pull() {
-        if (isEmpty()) {
-            return null;
+        if (!isEmpty()) {
+            T data = first.data;
+            first = first.next;
+            size--;
+            return data;
         } else {
-            QueueNode<T> tempFirst;
-            tempFirst = start;
-            if (start.nextNode == null) {
-                start = null;
-                count--;
-                return tempFirst.data;
-            } else {
-                QueueNode<T> tempNext;
-                tempNext = start.nextNode.nextNode;
-                start = start.nextNode;
-                start.nextNode = tempNext;
-                count--;
-                return tempFirst.data;
-            }
+            return null;
         }
     }
 
     @Override
     public int size() {
-        return count;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return start == null;
+        return first == null;
     }
 }
