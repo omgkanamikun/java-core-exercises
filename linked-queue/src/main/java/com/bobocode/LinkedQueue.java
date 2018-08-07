@@ -19,9 +19,10 @@ public class LinkedQueue<T> implements Queue<T> {
 
     private int size;
     private Node<T> first;
+    private Node<T> last;
 
     LinkedQueue() {
-        first = null;
+        first = last = null;
         size = 0;
     }
 
@@ -29,14 +30,11 @@ public class LinkedQueue<T> implements Queue<T> {
     public void add(T element) {
         Node<T> node = new Node<>(element);
         if (isEmpty()) {
-            first = node;
+            first = last = node;
             size++;
         } else {
-            Node<T> temp = first;
-            while (temp.next != null) {
-                temp = temp.next;
-            }
-            temp.next = node;
+            last.next = node;
+            last = last.next;
             size++;
         }
     }

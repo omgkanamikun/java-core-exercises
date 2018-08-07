@@ -42,6 +42,15 @@ public class QueueTest {
     }
 
     @Test
+    public void testAddQueue(){
+        Queue<Object>queue = new LinkedQueue<>();
+        queue.add(123);
+        Queue<Object>objectQueue = new LinkedQueue<>();
+        objectQueue.add(queue);
+        System.out.println(queue.pull());
+    }
+
+    @Test
     public void testPullElement() {
         integerQueue.add(33);
         integerQueue.add(123);
